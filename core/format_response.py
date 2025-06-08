@@ -17,18 +17,25 @@ def format_response(response_text):
         line = line.strip()
         if not line:
             continue
+
+        # Deteksi awal event baru
         if re.match(r"^(#\s*)?\d{1,2}\.\s", line):
             if count >= max_display:
                 break
 
+            # Simpan event sebelumnya jika ada
             if temp_event:
                 if pendaftaran:
                     temp_event += f"📅 _Pendaftaran:_ {pendaftaran}\n"
-                    pendaftaran = ""
                 event_list.append(temp_event.strip())
+                temp_event = ""
+                pendaftaran = ""
+
+            # Mulai event baru
             nama_event = re.sub(r"^(#\s*)?\d{1,2}\.\s", '', line).strip()
             count += 1
             temp_event = f"*{count}. {nama_event}*\n"
+
         elif "Pendaftaran" in line or "Periode" in line:
             pendaftaran = line.split(":", 1)[-1].strip()
 
@@ -59,15 +66,15 @@ def format_response(response_text):
             else:
                 temp_event += f"🔗 _Link:_ {link}\n"
 
-    # Simpan event terakhir
-    if temp_event and (pendaftaran or "📅" in temp_event):
+    # Simpan event terakhir (jika belum disimpan)
+    if temp_event:
         if pendaftaran:
-            for pd in pendaftaran:
-                temp_event += f"📅 _Pendaftaran:_ {pd}\n"
+            temp_event += f"📅 _Pendaftaran:_ {pendaftaran}\n"
         event_list.append(temp_event.strip())
 
+    # Tambahkan info jika melebihi batas tampilan
     if count >= max_display:
-        event_list.append("\n❗ *Masih ada informasi lain yang tersedia.*\n_Ketik 'Lihat lebih banyak' untuk melihat semua._")
+        event_list.append("❗ *Masih ada informasi lain yang tersedia.*\n_Ketik 'Lihat lebih banyak' untuk melihat semua._")
 
-    logging.info("🎯 Format respons selesai (NO ESCAPE Mode)")
+    logging.info("🎯 Format respons selesai")
     return header + "\n\n".join(event_list)
