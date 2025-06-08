@@ -1,14 +1,9 @@
 # 🧠 UPA UNTAN Telegram Bot
 
-Bot Telegram berbasis Python untuk keperluan pelayanan informasi akademik UPA UNTAN. Bot ini dapat memberikan informasi FAQ, scraping konten dari Instagram, serta merekomendasikan jawaban menggunakan model AI.
+Bot Telegram berbasis Python untuk keperluan pelayanan informasi akademik UPA UNTAN. Bot ini dapat memberikan informasi FAQ, scraping konten dari Instagram, serta merekomendasikan jawaban menggunakan model AI.\
 
-Kalau kamu mau langsung pakai di README.md, bisa gunakan ini:
-
-markdown
-Copy
-Edit
 ## 📂 Struktur Proyek
-
+<pre>
 upa-untan-telegram-bot/
 ├── bot.py # Entry point utama bot
 ├── cache_store.py # Manajemen cache
@@ -21,10 +16,7 @@ upa-untan-telegram-bot/
 ├── .env # Variabel lingkungan (jangan diupload publik)
 ├── requirements.txt # Daftar dependensi
 └── README.md # Dokumentasi proyek
-
-Copy
-Edit
-Kalau kamu ingin saya bantu edit langsung isi file README.md-mu, tinggal upload file .md aslinya atau beri akses isi markdown-nya.
+</pre>
 
 ## 🚀 Cara Menjalankan
 
