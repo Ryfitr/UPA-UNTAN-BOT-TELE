@@ -42,11 +42,12 @@ upa-untan-telegram-bot/
 
 
 ## 📊 Dashboard
-Untuk menjalankan dashboard:
- ```bash
-streamlit run dashboard/dashboard.py
+   Untuk menjalankan dashboard:
+      ```bash
+      streamlit run dashboard/dashboard.py
 
-## ⚙️ Fitur Utama
+##⚙️ Fitur Utama
+
 1. FAQ suggestion berbasis AI
 2. Scraper konten dari Instagram
 3. Interaksi Telegram Bot dengan command handler
