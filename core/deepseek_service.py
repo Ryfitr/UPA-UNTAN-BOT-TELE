@@ -51,29 +51,30 @@ def generate_response(user_message, user_id):
     try:
         today = datetime.datetime.today().strftime("%Y-%m-%d")
         structured_instruction = f"""
-Anggap kamu adalah asisten untuk mahasiswa universitas.
-Pertanyaannya adalah: "{user_message}"
-
-Jawablah dalam bahasa Indonesia.
-Hanya tampilkan informasi yang masih berlaku dan relevan untuk jenjang mahasiswa (S1, S2, atau S3).
-Jangan tampilkan informasi atau istilah untuk pelajar SD, SMP, atau SMA.
-Jika pertanyaan berkaitan dengan lomba, beasiswa, pelatihan, atau event, tampilkan hanya yang aktif setelah tanggal {today}.
-
-Jika informasi berupa daftar event, gunakan format seperti ini:
-
-1. [Nama Event]
-Pendaftaran: ...
-Penyelenggara: ...
-Bidang: ...
-Lokasi: ...
-Pelaksanaan: ...
-Jenjang: ...
-Link: ...
+        Anggap kamu adalah asisten untuk mahasiswa universitas.
+        Pertanyaannya adalah: "{user_message}"
+        
+        Jawablah dalam bahasa Indonesia.
+        Hanya tampilkan informasi yang masih berlaku dan relevan untuk jenjang mahasiswa (S1, S2, atau S3).
+        Jangan tampilkan informasi atau istilah untuk pelajar SD, SMP, atau SMA.
+        Jika pertanyaan berkaitan dengan lomba, beasiswa, pelatihan, atau event, tampilkan hanya yang aktif setelah tanggal {today}.
+        
+        Jika informasi berupa daftar event, gunakan format seperti ini:
+        
+        1. [Nama Event]
+        Pendaftaran: ...
+        Penyelenggara: ...
+        Bidang: ...
+        Lokasi: ...
+        Pelaksanaan: ...
+        Jenjang: ...
+        Link: ...
         """.strip()
 
-        history = get_chat_history(user_id)
-        history.append({"role": "system", "content": structured_instruction})
-        history.append({"role": "user", "content": user_message})
+        history = [
+        {"role": "system", "content": structured_instruction},
+        {"role": "user", "content": user_message}
+        ]
 
         payload = {
             "model": "deepseek-chat",
