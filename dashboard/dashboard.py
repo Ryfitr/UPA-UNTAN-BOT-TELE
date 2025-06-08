@@ -64,18 +64,19 @@ table_choice = st.sidebar.selectbox(
 )
 
 st.markdown(f"### Tabel: `{table_choice}`")
-df = load_table(table_choice)
+if table_choice != "log":
+    df = load_table(table_choice)
 
-if not df.empty:
-    st.dataframe(df, use_container_width=True)
-    st.download_button(
-        label="⬇️ Download Excel",
-        data=export_to_excel(df),
-        file_name=f"{table_choice}.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
-else:
-    st.warning("⚠️ Tidak ada data yang bisa ditampilkan.")
+    if not df.empty:
+        st.dataframe(df, use_container_width=True)
+        st.download_button(
+            label="⬇️ Download Excel",
+            data=export_to_excel(df),
+            file_name=f"{table_choice}.xlsx",
+            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        )
+    else:
+        st.warning("⚠️ Tidak ada data yang bisa ditampilkan.")
 
 if table_choice == "conversations" and 'user_id' in df.columns:
     st.markdown("#### 🔍 Statistik Pengguna:")
@@ -167,13 +168,15 @@ if table_choice == "lowongan":
         if submitted:
             insert_lowongan(posisi, perusahaan, deadline.strftime("%Y-%m-%d"), lokasi, link)
             st.success("✅ Lowongan berhasil ditambahkan!")
+            
 if table_choice == "log":
     st.markdown("### 📄 Log Bot Telegram")
     LOG_PATH = "logs/bot.log"
     if os.path.exists(LOG_PATH):
+        if st.button("🔄 Refresh Log"):
+            st.experimental_rerun()
         with open(LOG_PATH, "r", encoding="utf-8") as f:
             log_content = f.read()
-            st.text_area("📋 Isi Log Bot", value=log_content, height=400)
+        st.text_area("📋 Isi Log Bot", value=log_content, height=400)
     else:
         st.warning("❌ File log tidak ditemukan.")
-
