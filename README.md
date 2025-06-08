@@ -25,23 +25,25 @@ upa-untan-telegram-bot/
    cd upa-untan-telegram-bot
 
 2. Buat virtual environment & install dependensi
+   ```bash
     python -m venv venv
     source venv/bin/activate   # Windows: venv\Scripts\activate
     pip install -r requirements.txt
 
-3. Buat file .env
+4. Buat file .env
     Isi file .env seperti:
-
+    ```bash
     TELEGRAM_BOT_TOKEN=your_token_here
     OPENAI_API_KEY=your_openai_key
 
-4. Jalankan bot
-    python bot.py
+5. Jalankan bot
+    ```bash
+   python bot.py
 
 
 ## 📊 Dashboard
 Untuk menjalankan dashboard:
-
+ ```bash
 streamlit run dashboard/dashboard.py
 
 ## ⚙️ Fitur Utama
