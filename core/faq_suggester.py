@@ -2,41 +2,54 @@ import sqlite3
 from rapidfuzz import fuzz
 from config.config import DB_PATH
 
-def suggest_faq(question):
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute("SELECT question, answer FROM faq")
-    faq_entries = c.fetchall()
-    conn.close()
+def suggest_faq(user_question, threshold=75):
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        c.execute("SELECT keyword, response FROM faq")
+        faq_entries = c.fetchall()
+    finally:
+        conn.close()
+
     suggestions = []
-    for q, a in faq_entries:
-        score = fuzz.token_sort_ratio(question.lower(), q.lower())
-        if score > 75:
-            suggestions.append((q, a, score))
+    for keyword, response in faq_entries:
+        score = fuzz.token_sort_ratio(user_question.lower(), keyword.lower())
+        if score >= threshold:
+            suggestions.append((keyword, response, score))
+
     suggestions.sort(key=lambda x: x[2], reverse=True)
     return suggestions
 
+
 def find_similar_faq(user_question, threshold=75):
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute("SELECT question, answer FROM faq")
-    faq_entries = c.fetchall()
-    conn.close()
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        c.execute("SELECT keyword, response FROM faq")
+        faq_entries = c.fetchall()
+    finally:
+        conn.close()
+
     best_match = None
     highest_score = 0
-    for question, answer in faq_entries:
-        score = fuzz.token_set_ratio(user_question.lower(), question.lower())
+
+    for keyword, response in faq_entries:
+        score = fuzz.token_set_ratio(user_question.lower(), keyword.lower())
         if score > highest_score and score >= threshold:
             highest_score = score
-            best_match = (question, answer)
-    return best_match
+            best_match = response
+
+    return best_match  # langsung return response string atau None
+
 
 def group_unanswered_questions(threshold=70):
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute("SELECT question FROM unanswered")
-    questions = [q[0] for q in c.fetchall()]
-    conn.close()
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        c.execute("SELECT question FROM unanswered")
+        questions = [q[0] for q in c.fetchall()]
+    finally:
+        conn.close()
 
     groups = []
     visited = set()
@@ -54,4 +67,5 @@ def group_unanswered_questions(threshold=70):
                     visited.add(j)
         if len(group) > 1:
             groups.append(group)
+
     return groups
