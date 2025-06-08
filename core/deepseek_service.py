@@ -79,7 +79,7 @@ def generate_response(user_message, user_id):
         payload = {
             "model": "deepseek-chat",
             "messages": history,
-            "temperature": 0.7,
+            "temperature": 0.3,
             "max_tokens": 1000
         }
 
