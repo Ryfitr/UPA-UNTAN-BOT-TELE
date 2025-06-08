@@ -60,7 +60,7 @@ def insert_lowongan(posisi, perusahaan, deadline, lokasi, link):
 # ================== UI ==================
 table_choice = st.sidebar.selectbox(
     "📂 Pilih Tabel",
-    ("conversations", "unanswered", "faq", "seminar", "lowongan")
+    ("conversations", "unanswered", "faq", "seminar", "lowongan", "log")
 )
 
 st.markdown(f"### Tabel: `{table_choice}`")
@@ -167,3 +167,13 @@ if table_choice == "lowongan":
         if submitted:
             insert_lowongan(posisi, perusahaan, deadline.strftime("%Y-%m-%d"), lokasi, link)
             st.success("✅ Lowongan berhasil ditambahkan!")
+if table_choice == "log":
+    st.markdown("### 📄 Log Bot Telegram")
+    LOG_PATH = "logs/bot.log"
+    if os.path.exists(LOG_PATH):
+        with open(LOG_PATH, "r", encoding="utf-8") as f:
+            log_content = f.read()
+            st.text_area("📋 Isi Log Bot", value=log_content, height=400)
+    else:
+        st.warning("❌ File log tidak ditemukan.")
+
