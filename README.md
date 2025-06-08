@@ -43,7 +43,7 @@ upa-untan-telegram-bot/
 
 ## 📊 Dashboard
    Untuk menjalankan dashboard:
-      ```bash
+   
       streamlit run dashboard/dashboard.py
 
 ##⚙️ Fitur Utama
