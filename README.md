@@ -33,8 +33,10 @@ upa-untan-telegram-bot/
 4. Buat file .env
     Isi file .env seperti:
     ```bash
-    TELEGRAM_BOT_TOKEN=your_token_here
-    OPENAI_API_KEY=your_openai_key
+   DEEPSEEK_API_KEY=your_deepseek_key
+   TELEGRAM_TOKEN=your_token_here
+   ADMIN_ID==your_id_here
+   OCR_SPACE_API_KEY=your_ocr_key
 
 5. Jalankan bot
     ```bash
