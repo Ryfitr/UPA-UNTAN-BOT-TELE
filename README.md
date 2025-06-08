@@ -1,6 +1,6 @@
 # 🧠 UPA UNTAN Telegram Bot
 
-Bot Telegram berbasis Python untuk keperluan pelayanan informasi akademik UPA UNTAN. Bot ini dapat memberikan informasi FAQ, scraping konten dari Instagram, serta merekomendasikan jawaban menggunakan model AI.\
+Bot Telegram berbasis Python untuk keperluan pelayanan informasi akademik UPA UNTAN. Bot ini dapat memberikan informasi FAQ, scraping konten dari Instagram, serta merekomendasikan jawaban menggunakan model AI.
 
 ## 📂 Struktur Proyek
 <pre>
@@ -13,16 +13,16 @@ upa-untan-telegram-bot/
 ├── database/ # Skrip DB dan file SQLite
 ├── handlers/ # Handler perintah bot Telegram
 ├── logs/ # Log aktivitas bot
-├── .env # Variabel lingkungan (jangan diupload publik)
-├── requirements.txt # Daftar dependensi
-└── README.md # Dokumentasi proyek
+├── .env
+├── requirements.txt
+└── README.md
 </pre>
 
 ## 🚀 Cara Menjalankan
 
 1. Clone repository ini
    ```bash
-   git clone https://github.com/ryfitr/upa-untan-telegram-bot.git
+   git clone https://github.com/Ryfitr/UPA-UNTAN-BOT-TELE.git
    cd upa-untan-telegram-bot
 
 2. Buat virtual environment & install dependensi
