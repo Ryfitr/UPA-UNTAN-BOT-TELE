@@ -49,7 +49,7 @@ upa-untan-telegram-bot/
    
       streamlit run dashboard/dashboard.py
 
-##⚙️ Fitur Utama
+⚙️ Fitur Utama
 
 1. FAQ suggestion berbasis AI
 2. Scraper konten dari Instagram
