@@ -5,7 +5,7 @@ from io import BytesIO
 import sys, os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from config.config import DB_PATH
-from core.faq_suggester import find_similar_faq
+from core.faq_suggester import group_unanswered_questions  
 
 st.set_page_config(page_title="📊 Dashboard Bot UPA UNTAN", layout="wide")
 st.title("📊 Dashboard Bot UPA UNTAN")
@@ -133,7 +133,7 @@ if table_choice == "faq":
                 st.success("✅ FAQ berhasil diperbarui!")
 
     st.markdown("### 🤖 Rekomendasi FAQ Otomatis")
-    grouped = group_similar_questions()
+    grouped = group_unanswered_questions()
     if grouped:
         for idx, group in enumerate(grouped):
             st.markdown(f"**Kelompok {idx+1}:**")
